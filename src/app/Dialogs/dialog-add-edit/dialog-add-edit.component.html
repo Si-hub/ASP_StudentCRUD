@@ -1,0 +1,65 @@
+<h2 mat-dialog-title>{{action}} Student</h2>
+<mat-dialog-content >
+    <form [formGroup]="formStudent">
+
+        <mat-grid-list cols="1" rowHeight="80px">
+
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Full Name</mat-label>
+                    <input matInput autocomplete="off" formControlName="fullName" placeholder="John McBerth">
+                    <mat-hint>Enter your full name</mat-hint>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Course</mat-label>
+                    <mat-select formControlName="courseId">
+                        <mat-option *ngFor="let item of listCourse" [value]="item.courseId">
+                          {{item.courseName}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Choose a course</mat-hint>
+                </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Phone number</mat-label>
+                    <input matInput autocomplete="off" placeholder="+27 55 555 1234" formControlName="phone" required>
+                    <mat-icon matSuffix>phone</mat-icon>
+                    <mat-hint>Include area code</mat-hint>
+                  </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput placeholder="amos@example.com" formControlName="email" required>
+                    <mat-icon matSuffix>email</mat-icon>
+                    <mat-hint>Enter your email</mat-hint>
+                  </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+                <mat-form-field appearance="outline">
+                    <mat-label>student Admission Date</mat-label>
+                    <input matInput [matDatepicker]="picker" autocomplete="off" formControlName="studentAdmissionDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+            </mat-grid-tile>
+
+        </mat-grid-list>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions >
+    <button mat-raised-button mat-dialog-close color="warn">Cancel</button>
+    <button mat-raised-button color="primary" 
+    [disabled]="formStudent.invalid"
+    (click)="addEditStudent()"
+    >
+    {{actionButton}}</button>
+</mat-dialog-actions>
